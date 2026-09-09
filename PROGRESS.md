@@ -53,8 +53,19 @@ Anthropic API key first** — stop and walk Bodhi through
   huge; a 717MB `.tif` in United States that Bodhi can delete). Web + thumb
   copies are made by `scripts/resize-photos.ps1`, which also trims white
   borders and writes `photos-manifest.json` + `photo-sizes.json`.
-- **Share preview:** `public/og.jpg` (1200×630) + Open Graph / Twitter metadata
-  in `layout.tsx`, all fed from `knowledge.json`.
+- **Share preview:** `public/og.jpg` (1200×630, from `knowledge.ogPhoto`) +
+  `public/og/<country>.jpg` per country (from each `cover`). Built by
+  `scripts/make-og-images.ps1`. Metadata in `layout.tsx` (global) and each
+  country page's `generateMetadata`.
+- **Favicon:** a white star on near-black — `src/app/icon.png` + `favicon.ico`
+  (both drawn by a one-off PowerShell snippet; regenerate with the same star
+  maths if changed).
+- **Blur-up loading:** `photo-sizes.json` entries are `[w, h, blurDataURL]`
+  (tiny base64 JPEG from the resize script). Images fade in from that blur via
+  `placeholder="blur"`.
+- **SEO:** `src/app/robots.ts` + `src/app/sitemap.ts` (both use
+  `knowledge.siteUrl`). Custom 404 at `src/app/not-found.tsx`.
+- **Instagram:** `knowledge.instagram` → link in the footer and on Contact.
 
 ## To add or change photos
 
@@ -102,11 +113,9 @@ Anthropic API key first** — stop and walk Bodhi through
 
 ## Things to add later
 
-- Favicon (browser-tab icon is still the default).
-- Instagram link in the footer, if Bodhi has one.
-- Photos fade in as they load.
 - Hero eyebrow ("LANDSCAPE & NIGHT-SKY PHOTOGRAPHY · HAWAII") still wraps to
   two lines on the narrowest phones — minor.
+- Could add Vercel Web Analytics (free on Hobby) so Bodhi can see visits.
 
 ## Questions for Lucas
 
@@ -132,3 +141,6 @@ Anthropic API key first** — stop and walk Bodhi through
   the site, and nothing changed visually. Deleted the old `_data/photos.ts`.
   Then fixed the mobile header (site name was wrapping onto two lines and
   colliding with the nav — now stacks name over nav below the `sm` breakpoint).
+  Then a batch of free polish: favicon (star), blur-up image loading,
+  robots.txt + sitemap, per-country share images, custom 404 page, Instagram
+  link (@bodhi_scott_photography) in the footer and on Contact.

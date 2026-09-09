@@ -5,6 +5,7 @@ import {
   countries,
   coverPhoto,
   knowledge,
+  photoBlur,
   photosByCountry,
 } from "../_data/knowledge";
 
@@ -41,6 +42,8 @@ export default function WorkPage() {
                     alt={`${country.name} — ${cover.caption}`}
                     fill
                     sizes="(max-width: 640px) 100vw, 50vw"
+                    placeholder={photoBlur(cover.file) ? "blur" : "empty"}
+                    blurDataURL={photoBlur(cover.file)}
                     className="object-cover transition duration-300 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { knowledge } from "../_data/knowledge";
+import { knowledge, photoBlur } from "../_data/knowledge";
 
 export const metadata: Metadata = {
   title: `About — ${knowledge.businessName}`,
@@ -38,6 +38,8 @@ export default function AboutPage() {
               alt=""
               fill
               sizes="(max-width: 640px) 100vw, 40vw"
+              placeholder={photoBlur(knowledge.heroPhoto) ? "blur" : "empty"}
+              blurDataURL={photoBlur(knowledge.heroPhoto)}
               className="object-cover"
             />
           </div>

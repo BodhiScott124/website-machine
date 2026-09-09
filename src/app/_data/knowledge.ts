@@ -8,6 +8,7 @@
 // shown on the Home page.
 
 import data from "./knowledge.json";
+import photoSizes from "./photo-sizes.json";
 
 export type Photo = {
   file: string;
@@ -26,10 +27,12 @@ export type Knowledge = {
   location: string;
   tagline: string;
   email: string;
+  instagram: string;
   about: string[];
   portraitNote: string;
   siteUrl: string;
   heroPhoto: string;
+  ogPhoto: string;
   countries: Country[];
   photos: Photo[];
 };
@@ -52,3 +55,14 @@ export function coverPhoto(countryName: string) {
   const inCountry = photosByCountry(countryName);
   return inCountry.find((p) => p.cover) ?? inCountry[0];
 }
+
+// [width, height, blurDataURL] written by scripts/resize-photos.ps1
+const sizes = photoSizes as unknown as Record<
+  string,
+  [number, number, string?]
+>;
+
+export function photoBlur(file: string): string | undefined {
+  return sizes[file]?.[2];
+}
+

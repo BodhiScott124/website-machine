@@ -20,9 +20,19 @@ export async function generateMetadata({
   const { country: slug } = await params;
   const country = countryBySlug(slug);
   if (!country) return {};
+  const title = `${country.name} — ${knowledge.businessName}`;
+  const description = `Photographs from ${country.name} by ${knowledge.name}.`;
+  const image = `/og/${slug}.jpg`;
   return {
-    title: `${country.name} — ${knowledge.businessName}`,
-    description: `Photographs from ${country.name} by ${knowledge.name}.`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `/work/${slug}`,
+      images: [{ url: image, width: 1200, height: 630 }],
+    },
+    twitter: { card: "summary_large_image", title, description, images: [image] },
   };
 }
 

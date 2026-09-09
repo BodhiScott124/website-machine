@@ -8,11 +8,16 @@ import Image from "next/image";
 import type { Photo } from "../_data/knowledge";
 import photoSizesJson from "../_data/photo-sizes.json";
 
-const photoSizes: Record<string, number[]> = photoSizesJson;
+type SizeEntry = [number, number, string?];
+const photoSizes = photoSizesJson as unknown as Record<string, SizeEntry>;
 
 function dims(file: string): [number, number] {
   const s = photoSizes[file];
-  return s && s.length === 2 ? [s[0], s[1]] : [3, 2];
+  return s ? [s[0], s[1]] : [3, 2];
+}
+
+function blur(file: string): string | undefined {
+  return photoSizes[file]?.[2];
 }
 
 export default function PhotoGrid({ items }: { items: Photo[] }) {
@@ -63,6 +68,8 @@ export default function PhotoGrid({ items }: { items: Photo[] }) {
                   width={w}
                   height={h}
                   sizes="(max-width: 640px) 100vw, 50vw"
+                  placeholder={blur(photo.file) ? "blur" : "empty"}
+                  blurDataURL={blur(photo.file)}
                   className="h-auto w-full transition duration-300 group-hover:opacity-90"
                 />
               </button>
@@ -123,6 +130,8 @@ export default function PhotoGrid({ items }: { items: Photo[] }) {
               alt={open.caption}
               fill
               sizes="90vw"
+              placeholder={blur(open.file) ? "blur" : "empty"}
+              blurDataURL={blur(open.file)}
               className="object-contain"
               priority
             />

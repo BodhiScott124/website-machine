@@ -21,6 +21,20 @@ export default function ContactPage() {
         >
           {knowledge.email}
         </a>
+        {knowledge.instagram && (
+          <p className="mt-6 text-black/60">
+            Or find me on{" "}
+            <a
+              href={`https://instagram.com/${knowledge.instagram}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4 hover:opacity-70"
+            >
+              Instagram
+            </a>
+            .
+          </p>
+        )}
       </div>
     </main>
   );

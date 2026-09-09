@@ -75,6 +75,28 @@ function Save-Resized($srcBmp, $crop, $maxEdge, $destDir, $quality, $name) {
     return $result
 }
 
+# A tiny (~24px) blurry JPEG as a base64 data URL, for the blur-up placeholder
+# shown while the real photo loads.
+function Get-BlurDataUrl($srcBmp, $crop) {
+    $cw = $crop.Width; $ch = $crop.Height
+    $scale = 24.0 / [Math]::Max($cw, $ch)
+    $nw = [Math]::Max(1, [int]($cw * $scale)); $nh = [Math]::Max(1, [int]($ch * $scale))
+    $bmp = New-Object System.Drawing.Bitmap $nw, $nh
+    $g = [System.Drawing.Graphics]::FromImage($bmp)
+    $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+    $g.DrawImage($srcBmp, (New-Object System.Drawing.Rectangle 0, 0, $nw, $nh), $crop.X, $crop.Y, $cw, $ch, [System.Drawing.GraphicsUnit]::Pixel)
+    $g.Dispose()
+    $enc = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
+    $ep = New-Object System.Drawing.Imaging.EncoderParameters 1
+    $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter ([System.Drawing.Imaging.Encoder]::Quality), ([long]40)
+    $ms = New-Object System.IO.MemoryStream
+    $bmp.Save($ms, $enc, $ep)
+    $bmp.Dispose()
+    $b64 = [Convert]::ToBase64String($ms.ToArray())
+    $ms.Dispose()
+    return "data:image/jpeg;base64,$b64"
+}
+
 function Slug($s) { ($s -replace '[^A-Za-z0-9]+', '-').Trim('-').ToLower() }
 
 $manifest = @()
@@ -97,8 +119,9 @@ Get-ChildItem $photosRoot -Directory | Where-Object { $_.Name -notin @('web', 't
             $crop = Get-BorderCrop $bmp
             $full = Save-Resized $bmp $crop 2400 $outFull 82 $name
             $thumb = Save-Resized $bmp $crop 1000 $outThumb 78 $name
+            $blur = Get-BlurDataUrl $bmp $crop
             $bmp.Dispose()
-            $manifest += [ordered]@{ file = $name; country = $country; source = $_.Name; w = $thumb.w; h = $thumb.h }
+            $manifest += [ordered]@{ file = $name; country = $country; source = $_.Name; w = $thumb.w; h = $thumb.h; blur = $blur }
             Write-Output ("  {0}  ({1}KB)  {2}x{3}" -f $name, $full.kb, $thumb.w, $thumb.h)
         } catch {
             Write-Output "  FAILED $($_.Name): $_"
@@ -110,10 +133,10 @@ Get-ChildItem $photosRoot -Directory | Where-Object { $_.Name -notin @('web', 't
 $utf8 = New-Object System.Text.UTF8Encoding $false
 [System.IO.File]::WriteAllText((Join-Path $PSScriptRoot "photos-manifest.json"), ($manifest | ConvertTo-Json), $utf8)
 
-# A { "<file>": [w, h] } map the website reads to lay photos out at their real
-# shape (so portrait photos aren't cropped square).
+# A { "<file>": [w, h, blurDataUrl] } map the website reads to lay photos out at
+# their real shape and show a blur-up placeholder while they load.
 $sizes = [ordered]@{}
-foreach ($m in $manifest) { $sizes[$m.file] = @($m.w, $m.h) }
+foreach ($m in $manifest) { $sizes[$m.file] = @($m.w, $m.h, $m.blur) }
 $sizesPath = Join-Path $PSScriptRoot "..\src\app\_data\photo-sizes.json"
 [System.IO.File]::WriteAllText($sizesPath, ($sizes | ConvertTo-Json), $utf8)
 

@@ -5,6 +5,7 @@
   "location": "Hawaii",
   "tagline": "Landscapes and the night sky, shot for the love of it.",
   "email": "bscotthawaii@gmail.com",
+  "instagram": "bodhi_scott_photography",
   "about": [
     "I'm Bodhi Scott. I grew up in Australia and now live in Hawaii — which turned out to be a good place to point a camera.",
     "I picked up photography in 2023 and it stuck fast. Most of what I shoot is landscapes and the night sky: chasing clear skies, early light, and the quiet you only get before sunrise."
@@ -12,6 +13,7 @@
   "portraitNote": "Also available for the occasional portrait commission.",
   "siteUrl": "https://website-machine-eight.vercel.app",
   "heroPhoto": "italy-6ii7186",
+  "ogPhoto": "italy-6ii7051",
   "countries": [
     { "name": "Italy", "slug": "italy" },
     { "name": "Australia", "slug": "australia" },

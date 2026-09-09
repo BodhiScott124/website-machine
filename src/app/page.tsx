@@ -4,7 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PhotoGrid from "./_components/PhotoGrid";
-import { knowledge, featuredPhotos, photos } from "./_data/knowledge";
+import { knowledge, featuredPhotos, photos, photoBlur } from "./_data/knowledge";
 
 const heroCaption =
   photos.find((p) => p.file === knowledge.heroPhoto)?.caption ?? "";
@@ -20,6 +20,8 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
+          placeholder={photoBlur(knowledge.heroPhoto) ? "blur" : "empty"}
+          blurDataURL={photoBlur(knowledge.heroPhoto)}
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/25" />
