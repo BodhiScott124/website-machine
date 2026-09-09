@@ -1,10 +1,13 @@
 // Home page. Short by design: a big photo, a few favourites, and links through
-// to the rest of the site.
+// to the rest of the site. All the words come from _data/knowledge.json.
 
 import Image from "next/image";
 import Link from "next/link";
 import PhotoGrid from "./_components/PhotoGrid";
-import { featuredPhotos } from "./_data/photos";
+import { knowledge, featuredPhotos, photos } from "./_data/knowledge";
+
+const heroCaption =
+  photos.find((p) => p.file === knowledge.heroPhoto)?.caption ?? "";
 
 export default function Home() {
   return (
@@ -12,8 +15,8 @@ export default function Home() {
       {/* Hero */}
       <section className="relative flex h-[80vh] min-h-[460px] items-end">
         <Image
-          src="/photos/web/italy-6ii7186.jpg"
-          alt="Mist lying in the valleys at first light"
+          src={`/photos/web/${knowledge.heroPhoto}.jpg`}
+          alt={heroCaption}
           fill
           priority
           sizes="100vw"
@@ -22,13 +25,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/25" />
         <div className="relative mx-auto w-full max-w-5xl px-6 pb-14 text-white">
           <p className="text-sm uppercase tracking-[0.2em] text-white/70">
-            Landscape &amp; night-sky photography · Hawaii
+            {knowledge.specialty} · {knowledge.location}
           </p>
           <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-            Bodhi Scott
+            {knowledge.name}
           </h1>
           <p className="mt-4 max-w-xl text-lg text-white/85">
-            Landscapes and the night sky, shot for the love of it.
+            {knowledge.tagline}
           </p>
         </div>
       </section>
@@ -57,11 +60,7 @@ export default function Home() {
       <section className="border-t border-black/10">
         <div className="mx-auto max-w-5xl px-6 py-20">
           <h2 className="text-2xl font-semibold tracking-tight">About</h2>
-          <p className="mt-6 max-w-2xl text-black/75">
-            I grew up in Australia and now live in Hawaii. I picked up
-            photography in 2023 and it stuck fast — mostly landscapes and the
-            night sky.
-          </p>
+          <p className="mt-6 max-w-2xl text-black/75">{knowledge.about[0]}</p>
           <Link
             href="/about"
             className="mt-4 inline-block text-sm text-black/55 underline underline-offset-4 hover:text-black"
@@ -79,10 +78,10 @@ export default function Home() {
             Questions, or want to work together?
           </p>
           <a
-            href="mailto:bscotthawaii@gmail.com"
+            href={`mailto:${knowledge.email}`}
             className="mt-4 inline-block text-lg font-medium underline underline-offset-4 hover:opacity-70"
           >
-            bscotthawaii@gmail.com
+            {knowledge.email}
           </a>
         </div>
       </section>

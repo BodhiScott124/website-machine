@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { knowledge } from "../_data/knowledge";
 
 const links = [
   { label: "Work", href: "/work" },
@@ -18,7 +19,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-20 border-b border-black/10 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link href="/" className="text-sm font-semibold tracking-tight">
-          Bodhi Scott Photography
+          {knowledge.businessName}
         </Link>
         <nav className="flex gap-6 text-sm">
           {links.map((link) => {

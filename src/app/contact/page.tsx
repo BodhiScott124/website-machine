@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { knowledge } from "../_data/knowledge";
 
 export const metadata: Metadata = {
-  title: "Contact — Bodhi Scott Photography",
-  description: "Get in touch with Bodhi Scott.",
+  title: `Contact — ${knowledge.businessName}`,
+  description: `Get in touch with ${knowledge.name}.`,
 };
 
 export default function ContactPage() {
@@ -15,10 +16,10 @@ export default function ContactPage() {
           everything and reply as soon as I can.
         </p>
         <a
-          href="mailto:bscotthawaii@gmail.com"
+          href={`mailto:${knowledge.email}`}
           className="mt-8 inline-block text-xl font-medium underline underline-offset-4 hover:opacity-70"
         >
-          bscotthawaii@gmail.com
+          {knowledge.email}
         </a>
       </div>
     </main>

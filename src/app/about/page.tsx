@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { knowledge } from "../_data/knowledge";
 
 export const metadata: Metadata = {
-  title: "About — Bodhi Scott Photography",
-  description:
-    "Bodhi Scott — landscape and night-sky photographer, Australian, based in Hawaii.",
+  title: `About — ${knowledge.businessName}`,
+  description: `${knowledge.name} — ${knowledge.specialty.toLowerCase()}, based in ${knowledge.location}.`,
 };
 
 export default function AboutPage() {
@@ -16,18 +16,12 @@ export default function AboutPage() {
 
         <div className="mt-10 grid gap-10 sm:grid-cols-[1.4fr_1fr] sm:items-start">
           <div className="space-y-4 text-black/75">
-            <p>
-              I&apos;m Bodhi Scott. I grew up in Australia and now live in
-              Hawaii — which turned out to be a good place to point a camera.
-            </p>
-            <p>
-              I picked up photography in 2023 and it stuck fast. Most of what I
-              shoot is landscapes and the night sky: chasing clear skies, early
-              light, and the quiet you only get before sunrise.
-            </p>
-            <p className="text-black/55">
-              Also available for the occasional portrait commission.
-            </p>
+            {knowledge.about.map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+            {knowledge.portraitNote && (
+              <p className="text-black/55">{knowledge.portraitNote}</p>
+            )}
             <p>
               <Link
                 href="/contact"
@@ -40,8 +34,8 @@ export default function AboutPage() {
 
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-stone-100">
             <Image
-              src="/photos/thumb/italy-6ii7186.jpg"
-              alt="Mist lying in the valleys at first light"
+              src={`/photos/thumb/${knowledge.heroPhoto}.jpg`}
+              alt=""
               fill
               sizes="(max-width: 640px) 100vw, 40vw"
               className="object-cover"

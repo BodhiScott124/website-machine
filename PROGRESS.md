@@ -4,170 +4,128 @@
 > session and updates it at the end. Keep it honest and keep it short — if it
 > stops being true it stops being useful.
 
-**Last updated:** 2026-09-09 — session 2 (part 2)
+**Last updated:** 2026-09-09 — session 3
 
 ---
 
 ## What I'm building
 
 A tool that takes a small business's existing website, works out what the
-business does, and automatically builds them a much better website.
-
-I run it myself by talking to Claude. It has no login, no forms and no admin
-screens, because I'm the only person who will ever use it.
+business does, and automatically builds them a much better website. I run it
+myself by talking to Claude — no login, no forms, no admin screens.
 
 Full spec: `guide/build-brief.md`
 
 ## Where I'm up to
 
-**Stages 1 and 2 are DONE.** The photography site is live, real, and properly
-mine: **https://website-machine-eight.vercel.app**
+**Stages 1–3 done.** My photography site is live, real, and mine, and the
+content is now separated from the design.
 
-Real photos (33, by country, with a lightbox), my own words, Home / Work /
-About / Contact pages, a proper share preview.
+- **Live:** https://website-machine-eight.vercel.app
+- **Code:** https://github.com/BodhiScott124/website-machine
+- **Vercel:** dashboard at vercel.com (auto-deploys on every push to `main`)
 
-**Buying `bodhiscottphotography.com`** (through Vercel, ~$10–12/yr, needs Dad's
-card) — planned, not done yet. When it's bought: connect it in Vercel, then
-change `metadataBase` in `src/app/layout.tsx` from the vercel.app URL to the
-real one.
+**Next: Stage 4** — a small script that asks Claude (via the Anthropic API) to
+write an "about" paragraph for a made-up business and prints it. **Needs an
+Anthropic API key first** — stop and walk Bodhi through
+`guide/setup-and-accounts.md` §4 before starting.
 
-**Next: Stage 3** — pull my details (name, contact, the photo list) out of the
-page code into a `knowledge.json` file, so the design and the details become
-separate things. Nothing changes visually.
+**Also pending (Bodhi's move):** buy `bodhiscottphotography.com` through Vercel
+(~$10–12/yr, needs Dad's card). Once bought: connect it in Vercel, then change
+`siteUrl` in `src/app/_data/knowledge.json` to the new domain.
 
-## Key addresses
+## How the site is built
 
-- **Live site:** https://website-machine-eight.vercel.app
-- **Code on GitHub:** https://github.com/BodhiScott124/website-machine
-- **Vercel project:** dashboard at vercel.com (imported from the GitHub repo)
-- Local dev preview: `.claude/launch.json` runs `next dev` on port 3000
+- **Next.js + TypeScript + Tailwind**, deployed on Vercel. Fully static.
+- **`src/app/_data/knowledge.json`** — the single source of truth for the site:
+  name, contact, all the words, and the photo list. Every page reads from it
+  via `src/app/_data/knowledge.ts` (types + helpers). Change a detail there and
+  the whole site follows.
+- **Pages:** Home (`/`, shows the `featured` photos), Work (`/work`, a card per
+  country), Work/<country> (`/work/italy` etc, that country's full gallery —
+  one static page per country), About, Contact. Shared `SiteHeader` (client,
+  highlights current page) + `SiteFooter` in the root layout.
+- **`_components/PhotoGrid.tsx`** (client) — the gallery: masonry layout so
+  portrait and landscape photos both show at their real shape, and clicking a
+  photo opens a full-size lightbox (prev / next / Esc). Reads photo dimensions
+  from `src/app/_data/photo-sizes.json`.
+- **Photos:** 33, originals in `public/photos/<Country>/` (gitignored — some are
+  huge; a 717MB `.tif` in United States that Bodhi can delete). Web + thumb
+  copies are made by `scripts/resize-photos.ps1`, which also trims white
+  borders and writes `photos-manifest.json` + `photo-sizes.json`.
+- **Share preview:** `public/og.jpg` (1200×630) + Open Graph / Twitter metadata
+  in `layout.tsx`, all fed from `knowledge.json`.
 
-## What's working right now
+## To add or change photos
 
-- Git and Node.js are installed on the PC (they were missing at the start).
-- The project is a Next.js website with Tailwind for styling.
-- One page for **Bodhi Scott Photography**: top bar, hero ("Landscapes and
-  portraits by Bodhi Scott"), placeholder portfolio grid, short About, Contact
-  section with the real email (bscotthawaii@gmail.com).
-- `npm run build` passes; the site is fully static.
-- Code is on GitHub (commits pushed). Vercel auto-deploys the site whenever a
-  new commit lands on the `main` branch on GitHub.
-- **Git push auth works and is saved.** Getting there was painful: the GitHub
-  sign-in popup doesn't work in the Claude desktop app, so auth was done with a
-  one-time device code (github.com/login/device), client ID
-  `178c6fc778ccc68e1d6a`, scopes `repo`. Git Credential Manager (`credential.
-  helper = manager`) captured the token into Windows Credential Manager during
-  the first successful push, so it now persists — `git fetch`/`git push` run
-  with no prompt. If it ever stops working, re-do the device-code flow.
+1. Drop files into `public/photos/<Country>/`
+2. `powershell -ExecutionPolicy Bypass -File scripts/resize-photos.ps1`
+3. Add a line to the `photos` list in `src/app/_data/knowledge.json`
+   (`file` = the generated name; see `scripts/photos-manifest.json`).
+   `featured` puts it on Home — keep those landscape so they fill the boxes.
+   `cover` sets a country card's photo.
 
-## Stage 2 — nearly done
+## Environment notes
 
-Done:
-- **Photos are organised by country.** Originals live in
-  `public/photos/<Country>/` (Australia, Italy, Switzerland, United States) —
-  all gitignored (some are huge; there's a 717MB `.tif` in United States that
-  Bodhi can delete). `scripts/resize-photos.ps1` walks those folders, trims any
-  thin white border, writes web + thumb copies (flat, named
-  `<country>-<original>`), and a `scripts/photos-manifest.json`.
-- **Gallery = all 33 photos**, listed in `src/app/_data/photos.ts` with
-  descriptive captions. `cover: true` marks the photo on each country's card;
-  `featured: true` marks the 6 on Home (kept landscape-only so they fill the
-  3:2 boxes cleanly — check orientation before adding a new one).
-- Real About text: born Australia, lives Hawaii, started photography 2023.
-- **Pages:** Home (`/` — 6 favourites), Work (`/work` — a card per country),
-  Work/<country> (`/work/italy` etc — that country's full gallery, a static
-  page per `generateStaticParams`), About, Contact. Shared `SiteHeader`
-  (client, highlights current page) + `SiteFooter` in the root layout.
-- **`_components/PhotoGrid.tsx`** (client) is the shared gallery: a masonry
-  layout so portrait and landscape photos both show at their real shape (not
-  cropped square), and clicking a photo opens a full-size lightbox with
-  prev/next/Esc. It reads photo dimensions from
-  `src/app/_data/photo-sizes.json`, which `scripts/resize-photos.ps1` writes
-  (plain UTF-8, no BOM — the JSON loader rejects a BOM).
-
-- **Share preview (Open Graph):** `public/og.jpg` (1200×630, the cypress
-  sunburst) + `openGraph`/`twitter` metadata in `layout.tsx`. `metadataBase` is
-  hardcoded to the vercel.app URL — **change it to the real domain once
-  bodhiscottphotography.com is connected** (there's a TODO in layout.tsx).
-- **Prints:** all "prints available" mentions removed (Bodhi isn't selling
-  prints yet).
-- **Portraits:** Bodhi doesn't have permission to show portrait photos yet, so
-  the claim is now one small line on the About page only — removed from the
-  home page and the metadata.
-
-Stage 2 is essentially done. Captions are all approved.
-
-## To add or change photos later
-
-1. Drop image files into `public/photos/<Country>/`
-2. Run `powershell -ExecutionPolicy Bypass -File scripts/resize-photos.ps1`
-3. Add/edit the entry in `src/app/_data/photos.ts` (`file` = the generated
-   name; see `scripts/photos-manifest.json`). `featured: true` puts it on Home.
-
-## Open questions for Bodhi
-
-- Confirm the 7 gallery captions, and whether any should name the location.
-- Does he want any portrait photos on the site?
-
-Resolved: he's Australian, lives in Hawaii. Started photography in 2023.
+- **Git + Node + GitHub CLI** were installed via `winget` (the Claude app
+  didn't expose a usable Node, contrary to the setup guide).
+- **Git push auth is saved** in Windows Credential Manager (`credential.helper
+  = manager`). The GitHub sign-in popup doesn't work in the Claude desktop app,
+  so it was set up with a one-time device code (github.com/login/device,
+  client id `178c6fc778ccc68e1d6a`). If push ever stops working, redo that.
 
 ## Stages
 
-- [x] **1. My photography site** — LIVE at website-machine-eight.vercel.app
-- [x] **2. Make it properly mine** — real photos, real words, real pages,
-      captions approved, share preview set. (Portraits held back — no permission
-      to show them yet.)
-- [ ] **3. Turn it into a template** — same design, holds any business's details
-- [ ] **4. First AI** — get Claude to write website copy for a made-up business
-- [ ] **5. The knowledge file** — one file per business, everything true about it
-- [ ] **6. Read a real website** — pull a business's details off their old site
+- [x] **1. My photography site** — live
+- [x] **2. Make it properly mine** — real photos, words, pages, share preview
+      (portraits held back — no permission to show them yet)
+- [x] **3. Separate design from details** — `knowledge.json` drives the site
+- [ ] **4. First AI** — Claude writes copy for a made-up business (needs API key)
+- [ ] **5. The knowledge file, properly** — messy text in → clean knowledge.json
+- [ ] **6. Read a real website** — scrape a business's details off their old site
 - [ ] **7. Join it all up** — website address in, finished site out
 - [ ] **8. A second template** — and have it pick the right one automatically
-- [ ] **9. Colours and photos** — match real brand colours, find good images
+- [ ] **9. Colours and photos** — real brand colours, Pexels images
 - [ ] **10. Put a demo online** — a real prospect's site, on my own domain
-- [ ] **11. Full circle** — point the machine at my own photography site
+- [ ] **11. Full circle** — run my own photography site through the machine
 
-## Decisions I've made
+## Decisions
 
-*(Claude: record decisions here as we make them, with the reason.)*
+- **Next.js + Tailwind on Vercel** — per the brief; matches Lucas's reference
+  build and the later stages, avoids a rebuild.
+- **Installed Node/Git/gh via winget** — weren't present. *Question for Lucas.*
+- **Deployed via Vercel dashboard import** (not the CLI — its login is awkward
+  in this app). Import also sets up auto-deploy.
+- **Multi-page** (not one long scroll) with a country-card Work page — Bodhi
+  found scrolling past every country annoying.
+- **Gallery is masonry + lightbox** — so vertical photos aren't cropped square.
 
-- **Followed the brief's stack: Next.js + TypeScript + Tailwind on Vercel.**
-  Considered a plain single HTML file (simpler for one page), but later stages
-  and Lucas's reference build use Next.js, so starting there avoids a rebuild.
-- **Installed Node.js even though `setup-and-accounts.md` says it isn't needed.**
-  The Claude app didn't expose a usable Node/npm on this PC. Installed via
-  `winget` (Git and GitHub CLI too). *Question for Lucas below.*
-- **One page with sections** (Work / About / Contact as anchors), matching
-  "Stage 1 = one page".
-- **Deployed by importing the GitHub repo in the Vercel dashboard** (vercel.com
-  /new → Import → Deploy), rather than the Vercel CLI — the CLI needs a login
-  step that's awkward in this app. Dashboard import also wires up auto-deploy.
+## Things to add later
 
-## Things I want to add later
-
-- Nothing yet.
+- Favicon (browser-tab icon is still the default).
+- Instagram link in the footer, if Bodhi has one.
+- Photos fade in as they load.
+- Site name wraps to two lines on phones — tighten.
 
 ## Questions for Lucas
 
-- The setup guide says Node.js isn't needed, but it wasn't available and the
-  build tools require it — installed via winget. Right call?
-- The GitHub sign-in popup doesn't work in the Claude desktop app, so we had to
-  use device-code auth and it took several tries. Is there a smoother way you
-  used, or should the guide cover this?
+- Setup guide says Node.js isn't needed, but it wasn't available and the build
+  tools require it — installed via winget. Right call?
+- The GitHub sign-in popup doesn't work in the Claude desktop app; had to use
+  device-code auth and it took several tries. Smoother way, or cover it in the
+  guide?
 
 ## Session log
 
-- **Session 1 (2026-09-08):** Met Bodhi (16, photographer — landscapes for fun,
-  portraits for work; business is "Bodhi Scott Photography"). Fixed a nested
-  folder, installed Git + Node + GitHub CLI, scaffolded Next.js, built the
-  Stage 1 one-page site with placeholder content, pushed to GitHub, and
-  deployed to Vercel. **Site is live** at website-machine-eight.vercel.app.
-  GitHub auth via device code took ~6 tries (wrong OAuth scopes each time) but
-  is now saved and working.
-- **Session 2 (2026-09-09):** Stage 2. Real photos + hero + gallery; real About
-  text (Australia → Hawaii, 2023); split into Home / Work / About / Contact.
-  Then Bodhi added ~33 photos in country subfolders. Work page became a card
-  per country → each country its own gallery page. Home favourites limited to
-  landscape shots. Added a masonry layout + click-to-enlarge lightbox so
-  portrait photos display properly and photos are clickable. All live. Left:
-  caption check on the newer photos; portraits optional.
+- **Session 1 (2026-09-08):** Met Bodhi (16, photographer). Installed Git/Node/
+  gh, scaffolded Next.js, built the Stage 1 one-page site, pushed to GitHub,
+  deployed to Vercel. Site live. GitHub auth took ~6 device-code tries.
+- **Session 2 (2026-09-09):** Stage 2. Real photos + About text; split into
+  Home / Work / About / Contact. Bodhi added ~33 photos in country subfolders →
+  Work became a card per country, each its own gallery page. Added masonry +
+  lightbox. Added share preview (og.jpg + metadata). Dropped print mentions,
+  shrank the portrait claim.
+- **Session 3 (2026-09-09):** Stage 3. Pulled every detail (name, contact,
+  words, photo list) out of the page code into `src/app/_data/knowledge.json`;
+  pages now read from it via `knowledge.ts`. Verified: editing the file changes
+  the site, and nothing changed visually. Deleted the old `_data/photos.ts`.

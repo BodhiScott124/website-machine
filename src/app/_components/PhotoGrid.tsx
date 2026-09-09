@@ -5,7 +5,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import type { Photo } from "../_data/photos";
+import type { Photo } from "../_data/knowledge";
 import photoSizesJson from "../_data/photo-sizes.json";
 
 const photoSizes: Record<string, number[]> = photoSizesJson;

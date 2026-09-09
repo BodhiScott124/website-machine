@@ -1,0 +1,54 @@
+// Everything true about the business lives in knowledge.json — name, contact,
+// the words on the site, and the photo list. The pages read from here, so
+// changing a detail is a one-line edit to knowledge.json and the site follows.
+//
+// To add or change photos: put the file in public/photos/<Country>/, run
+// scripts/resize-photos.ps1, then add a line to the "photos" list in
+// knowledge.json. `cover` = the photo on that country's card; `featured` = also
+// shown on the Home page.
+
+import data from "./knowledge.json";
+
+export type Photo = {
+  file: string;
+  caption: string;
+  country: string;
+  cover?: boolean;
+  featured?: boolean;
+};
+
+export type Country = { name: string; slug: string };
+
+export type Knowledge = {
+  businessName: string;
+  name: string;
+  specialty: string;
+  location: string;
+  tagline: string;
+  email: string;
+  about: string[];
+  portraitNote: string;
+  siteUrl: string;
+  heroPhoto: string;
+  countries: Country[];
+  photos: Photo[];
+};
+
+export const knowledge = data as Knowledge;
+
+export const photos = knowledge.photos;
+export const countries = knowledge.countries;
+export const featuredPhotos = photos.filter((p) => p.featured);
+
+export function photosByCountry(countryName: string) {
+  return photos.filter((p) => p.country === countryName);
+}
+
+export function countryBySlug(slug: string) {
+  return countries.find((c) => c.slug === slug);
+}
+
+export function coverPhoto(countryName: string) {
+  const inCountry = photosByCountry(countryName);
+  return inCountry.find((p) => p.cover) ?? inCountry[0];
+}

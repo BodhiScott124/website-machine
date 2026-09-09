@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { countries, coverPhoto, photosByCountry } from "../_data/photos";
+import {
+  countries,
+  coverPhoto,
+  knowledge,
+  photosByCountry,
+} from "../_data/knowledge";
 
 export const metadata: Metadata = {
-  title: "Work — Bodhi Scott Photography",
-  description:
-    "Landscape and night-sky photography by Bodhi Scott, by country: Italy, Australia, Switzerland and the United States.",
+  title: `Work — ${knowledge.businessName}`,
+  description: `${knowledge.specialty} by ${knowledge.name}, by country: ${countries
+    .map((c) => c.name)
+    .join(", ")}.`,
 };
 
 export default function WorkPage() {

@@ -5,8 +5,9 @@ import PhotoGrid from "../../_components/PhotoGrid";
 import {
   countries,
   countryBySlug,
+  knowledge,
   photosByCountry,
-} from "../../_data/photos";
+} from "../../_data/knowledge";
 
 // Build a static page for each country at build time.
 export function generateStaticParams() {
@@ -20,8 +21,8 @@ export async function generateMetadata({
   const country = countryBySlug(slug);
   if (!country) return {};
   return {
-    title: `${country.name} — Bodhi Scott Photography`,
-    description: `Photographs from ${country.name} by Bodhi Scott.`,
+    title: `${country.name} — ${knowledge.businessName}`,
+    description: `Photographs from ${country.name} by ${knowledge.name}.`,
   };
 }
 
