@@ -57,9 +57,11 @@ Anthropic API key first** — stop and walk Bodhi through
   `public/og/<country>.jpg` per country (from each `cover`). Built by
   `scripts/make-og-images.ps1`. Metadata in `layout.tsx` (global) and each
   country page's `generateMetadata`.
-- **Favicon:** a white star on near-black — `src/app/icon.png` + `favicon.ico`
-  (both drawn by a one-off PowerShell snippet; regenerate with the same star
-  maths if changed).
+- **Favicon:** a little white camera on near-black — `src/app/icon.png` +
+  `favicon.ico`, drawn by `scripts/make-favicon.ps1`.
+- **Vercel Analytics:** `<Analytics />` from `@vercel/analytics/next` in the
+  root layout. **Needs Bodhi to click "Enable" in the Vercel project's
+  Analytics tab** or no data is collected.
 - **Blur-up loading:** `photo-sizes.json` entries are `[w, h, blurDataURL]`
   (tiny base64 JPEG from the resize script). Images fade in from that blur via
   `placeholder="blur"`.
@@ -141,6 +143,7 @@ Anthropic API key first** — stop and walk Bodhi through
   the site, and nothing changed visually. Deleted the old `_data/photos.ts`.
   Then fixed the mobile header (site name was wrapping onto two lines and
   colliding with the nav — now stacks name over nav below the `sm` breakpoint).
-  Then a batch of free polish: favicon (star), blur-up image loading,
+  Then a batch of free polish: favicon (camera), blur-up image loading,
   robots.txt + sitemap, per-country share images, custom 404 page, Instagram
-  link (@bodhi_scott_photography) in the footer and on Contact.
+  link (@bodhi_scott_photography) in the footer and on Contact, and Vercel
+  Analytics (needs enabling in the Vercel dashboard).
