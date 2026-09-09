@@ -34,8 +34,8 @@ export const photos: Photo[] = [
   // ---- Italy ----
   { file: "italy-6ii7186", country: "Italy", caption: "Mist in the valley at dawn" },
   { file: "italy-6ii7051", country: "Italy", caption: "Sunrise through the cypresses", cover: true, featured: true },
-  { file: "italy-6ii6916", country: "Italy", caption: "Roadside chapel at sunset", featured: true },
-  { file: "italy-6ii6981", country: "Italy", caption: "Blue hour, crescent moon" },
+  { file: "italy-6ii6916", country: "Italy", caption: "Roadside chapel at sunset" },
+  { file: "italy-6ii6981", country: "Italy", caption: "Blue hour, crescent moon", featured: true },
   { file: "italy-6ii1193", country: "Italy", caption: "Bell tower on the hillside" },
   { file: "italy-6ii1197", country: "Italy", caption: "Castle above the valley" },
   { file: "italy-6ii7245", country: "Italy", caption: "A quiet corner of the village" },
@@ -48,8 +48,8 @@ export const photos: Photo[] = [
 
   // ---- Australia ----
   { file: "australia-img-6118", country: "Australia", caption: "Windmill and lone gum at dusk", cover: true },
-  { file: "australia-img-5874", country: "Australia", caption: "The Milky Way over an old shed", featured: true },
-  { file: "australia-milky-way", country: "Australia", caption: "The Milky Way core" },
+  { file: "australia-img-5874", country: "Australia", caption: "The Milky Way over an old shed" },
+  { file: "australia-milky-way", country: "Australia", caption: "The Milky Way core", featured: true },
   { file: "australia-dscf0703", country: "Australia", caption: "Last light over the water" },
   { file: "australia-dscf0770", country: "Australia", caption: "Storm colour at dusk", featured: true },
   { file: "australia-img-5660", country: "Australia", caption: "City skyline across the bay" },
