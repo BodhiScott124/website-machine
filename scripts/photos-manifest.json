@@ -1,167 +1,233 @@
-﻿[
+[
     {
         "file":  "australia-dscf0637",
         "country":  "Australia",
-        "source":  "DSCF0637.jpg"
+        "source":  "DSCF0637.jpg",
+        "w":  1000,
+        "h":  667
     },
     {
         "file":  "australia-dscf0703",
         "country":  "Australia",
-        "source":  "DSCF0703.jpg"
+        "source":  "DSCF0703.jpg",
+        "w":  1000,
+        "h":  631
     },
     {
         "file":  "australia-dscf0770",
         "country":  "Australia",
-        "source":  "DSCF0770.jpg"
+        "source":  "DSCF0770.jpg",
+        "w":  1000,
+        "h":  516
     },
     {
         "file":  "australia-img-5660",
         "country":  "Australia",
-        "source":  "IMG_5660.jpeg"
+        "source":  "IMG_5660.jpeg",
+        "w":  1000,
+        "h":  667
     },
     {
         "file":  "australia-img-5874",
         "country":  "Australia",
-        "source":  "IMG_5874.jpeg"
+        "source":  "IMG_5874.jpeg",
+        "w":  717,
+        "h":  1000
     },
     {
         "file":  "australia-img-6118",
         "country":  "Australia",
-        "source":  "IMG_6118.jpeg"
+        "source":  "IMG_6118.jpeg",
+        "w":  1000,
+        "h":  609
     },
     {
         "file":  "australia-img-6231",
         "country":  "Australia",
-        "source":  "IMG_6231.jpeg"
+        "source":  "IMG_6231.jpeg",
+        "w":  1000,
+        "h":  648
     },
     {
         "file":  "australia-img-6248",
         "country":  "Australia",
-        "source":  "IMG_6248.jpg"
+        "source":  "IMG_6248.jpg",
+        "w":  641,
+        "h":  1000
     },
     {
         "file":  "australia-milky-way",
         "country":  "Australia",
-        "source":  "Milky Way.png"
+        "source":  "Milky Way.png",
+        "w":  1000,
+        "h":  687
     },
     {
         "file":  "italy-dscf1549",
         "country":  "Italy",
-        "source":  "DSCF1549.jpg"
+        "source":  "DSCF1549.jpg",
+        "w":  1000,
+        "h":  674
     },
     {
         "file":  "italy-dscf1607",
         "country":  "Italy",
-        "source":  "DSCF1607.jpg"
+        "source":  "DSCF1607.jpg",
+        "w":  645,
+        "h":  1000
     },
     {
         "file":  "italy-dscf1664",
         "country":  "Italy",
-        "source":  "DSCF1664.jpg"
+        "source":  "DSCF1664.jpg",
+        "w":  1000,
+        "h":  664
     },
     {
         "file":  "italy-dscf1669",
         "country":  "Italy",
-        "source":  "DSCF1669.jpg"
+        "source":  "DSCF1669.jpg",
+        "w":  667,
+        "h":  1000
     },
     {
         "file":  "italy-italian-architecture",
         "country":  "Italy",
-        "source":  "Italian architecture.jpg"
+        "source":  "Italian architecture.jpg",
+        "w":  740,
+        "h":  1000
     },
     {
         "file":  "italy-6ii1193",
         "country":  "Italy",
-        "source":  "_6II1193.jpg"
+        "source":  "_6II1193.jpg",
+        "w":  548,
+        "h":  1000
     },
     {
         "file":  "italy-6ii1197",
         "country":  "Italy",
-        "source":  "_6II1197.jpg"
+        "source":  "_6II1197.jpg",
+        "w":  1000,
+        "h":  652
     },
     {
         "file":  "italy-6ii6916",
         "country":  "Italy",
-        "source":  "_6II6916.jpg"
+        "source":  "_6II6916.jpg",
+        "w":  622,
+        "h":  1000
     },
     {
         "file":  "italy-6ii6981",
         "country":  "Italy",
-        "source":  "_6II6981.jpg"
+        "source":  "_6II6981.jpg",
+        "w":  1000,
+        "h":  674
     },
     {
         "file":  "italy-6ii7051",
         "country":  "Italy",
-        "source":  "_6II7051.jpg"
+        "source":  "_6II7051.jpg",
+        "w":  1000,
+        "h":  619
     },
     {
         "file":  "italy-6ii7186",
         "country":  "Italy",
-        "source":  "_6II7186.jpg"
+        "source":  "_6II7186.jpg",
+        "w":  1000,
+        "h":  667
     },
     {
         "file":  "italy-6ii7245",
         "country":  "Italy",
-        "source":  "_6II7245.jpg"
+        "source":  "_6II7245.jpg",
+        "w":  667,
+        "h":  1000
     },
     {
         "file":  "italy-6ii7707",
         "country":  "Italy",
-        "source":  "_6II7707.jpg"
+        "source":  "_6II7707.jpg",
+        "w":  667,
+        "h":  1000
     },
     {
         "file":  "switzerland-img-9340",
         "country":  "Switzerland",
-        "source":  "IMG_9340.jpg"
+        "source":  "IMG_9340.jpg",
+        "w":  679,
+        "h":  1000
     },
     {
         "file":  "switzerland-img-9352",
         "country":  "Switzerland",
-        "source":  "IMG_9352.jpg"
+        "source":  "IMG_9352.jpg",
+        "w":  1000,
+        "h":  750
     },
     {
         "file":  "switzerland-img-9650",
         "country":  "Switzerland",
-        "source":  "IMG_9650.jpg"
+        "source":  "IMG_9650.jpg",
+        "w":  640,
+        "h":  1000
     },
     {
         "file":  "switzerland-img-9651",
         "country":  "Switzerland",
-        "source":  "IMG_9651.jpg"
+        "source":  "IMG_9651.jpg",
+        "w":  667,
+        "h":  1000
     },
     {
         "file":  "switzerland-6ii1470",
         "country":  "Switzerland",
-        "source":  "_6II1470.jpg"
+        "source":  "_6II1470.jpg",
+        "w":  1000,
+        "h":  640
     },
     {
         "file":  "united-states-dscf0434",
         "country":  "United States",
-        "source":  "DSCF0434.jpg"
+        "source":  "DSCF0434.jpg",
+        "w":  1000,
+        "h":  618
     },
     {
         "file":  "united-states-eagle-and-omega-nebulae",
         "country":  "United States",
-        "source":  "Eagle and Omega Nebulae.jpg"
+        "source":  "Eagle and Omega Nebulae.jpg",
+        "w":  1000,
+        "h":  619
     },
     {
         "file":  "united-states-moon",
         "country":  "United States",
-        "source":  "Moon.jpg"
+        "source":  "Moon.jpg",
+        "w":  1000,
+        "h":  939
     },
     {
         "file":  "united-states-north-america-nebula",
         "country":  "United States",
-        "source":  "North America Nebula.jpg"
+        "source":  "North America Nebula.jpg",
+        "w":  1000,
+        "h":  761
     },
     {
         "file":  "united-states-orion",
         "country":  "United States",
-        "source":  "Orion.png"
+        "source":  "Orion.png",
+        "w":  877,
+        "h":  1000
     },
     {
         "file":  "united-states-6ii7567",
         "country":  "United States",
-        "source":  "_6II7567.jpg"
+        "source":  "_6II7567.jpg",
+        "w":  1000,
+        "h":  667
     }
 ]

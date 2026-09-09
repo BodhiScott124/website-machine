@@ -70,7 +70,12 @@ Done:
   Work/<country> (`/work/italy` etc — that country's full gallery, a static
   page per `generateStaticParams`), About, Contact. Shared `SiteHeader`
   (client, highlights current page) + `SiteFooter` in the root layout.
-  `_components/PhotoGrid.tsx` is the shared grid.
+- **`_components/PhotoGrid.tsx`** (client) is the shared gallery: a masonry
+  layout so portrait and landscape photos both show at their real shape (not
+  cropped square), and clicking a photo opens a full-size lightbox with
+  prev/next/Esc. It reads photo dimensions from
+  `src/app/_data/photo-sizes.json`, which `scripts/resize-photos.ps1` writes
+  (plain UTF-8, no BOM — the JSON loader rejects a BOM).
 
 Still open for Stage 2:
 - **Photo captions** — descriptive, written by Claude, no place names. Bodhi
@@ -145,7 +150,8 @@ Resolved: he's Australian, lives in Hawaii. Started photography in 2023.
   is now saved and working.
 - **Session 2 (2026-09-09):** Stage 2. Real photos + hero + gallery; real About
   text (Australia → Hawaii, 2023); split into Home / Work / About / Contact.
-  Then Bodhi added ~33 photos sorted into country subfolders — Claude curated to
-  20, rebuilt the Work page as a section per country, added white-border
-  trimming to the resize script. All live. Left: caption check on the newer
-  photos; portraits optional.
+  Then Bodhi added ~33 photos in country subfolders. Work page became a card
+  per country → each country its own gallery page. Home favourites limited to
+  landscape shots. Added a masonry layout + click-to-enlarge lightbox so
+  portrait photos display properly and photos are clickable. All live. Left:
+  caption check on the newer photos; portraits optional.

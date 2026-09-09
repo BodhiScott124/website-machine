@@ -70,8 +70,9 @@ function Save-Resized($srcBmp, $crop, $maxEdge, $destDir, $quality, $name) {
     $ep = New-Object System.Drawing.Imaging.EncoderParameters 1
     $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter ([System.Drawing.Imaging.Encoder]::Quality), ([long]$quality)
     $bmp.Save($dest, $enc, $ep)
+    $result = [ordered]@{ w = $nw; h = $nh; kb = [math]::Round((Get-Item $dest).Length / 1KB) }
     $bmp.Dispose()
-    return [math]::Round((Get-Item $dest).Length / 1KB)
+    return $result
 }
 
 function Slug($s) { ($s -replace '[^A-Za-z0-9]+', '-').Trim('-').ToLower() }
@@ -94,18 +95,29 @@ Get-ChildItem $photosRoot -Directory | Where-Object { $_.Name -notin @('web', 't
                 8 { $bmp.RotateFlip([System.Drawing.RotateFlipType]::Rotate270FlipNone) }
             }
             $crop = Get-BorderCrop $bmp
-            $kb = Save-Resized $bmp $crop 2400 $outFull 82 $name
-            Save-Resized $bmp $crop 1000 $outThumb 78 $name | Out-Null
+            $full = Save-Resized $bmp $crop 2400 $outFull 82 $name
+            $thumb = Save-Resized $bmp $crop 1000 $outThumb 78 $name
             $bmp.Dispose()
-            $trimmed = if ($crop.Width -lt $bmp.Width -or $crop.X -gt 0) { " (trimmed)" } else { "" }
-            $manifest += [ordered]@{ file = $name; country = $country; source = $_.Name }
-            Write-Output ("  {0}  ({1}KB){2}" -f $name, $kb, $trimmed)
+            $manifest += [ordered]@{ file = $name; country = $country; source = $_.Name; w = $thumb.w; h = $thumb.h }
+            Write-Output ("  {0}  ({1}KB)  {2}x{3}" -f $name, $full.kb, $thumb.w, $thumb.h)
         } catch {
             Write-Output "  FAILED $($_.Name): $_"
         }
     }
 }
 
-$manifest | ConvertTo-Json | Out-File -Encoding utf8 (Join-Path $PSScriptRoot "photos-manifest.json")
+# plain UTF-8, no byte-order mark (the JSON loader rejects a BOM)
+$utf8 = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllText((Join-Path $PSScriptRoot "photos-manifest.json"), ($manifest | ConvertTo-Json), $utf8)
+
+# A { "<file>": [w, h] } map the website reads to lay photos out at their real
+# shape (so portrait photos aren't cropped square).
+$sizes = [ordered]@{}
+foreach ($m in $manifest) { $sizes[$m.file] = @($m.w, $m.h) }
+$sizesPath = Join-Path $PSScriptRoot "..\src\app\_data\photo-sizes.json"
+[System.IO.File]::WriteAllText($sizesPath, ($sizes | ConvertTo-Json), $utf8)
+
 Write-Output ""
-Write-Output "$($manifest.Count) photos processed. Manifest: scripts/photos-manifest.json"
+Write-Output "$($manifest.Count) photos processed."
+Write-Output "  scripts/photos-manifest.json"
+Write-Output "  src/app/_data/photo-sizes.json"
