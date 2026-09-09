@@ -20,58 +20,72 @@ Full spec: `guide/build-brief.md`
 
 ## Where I'm up to
 
-**Stage 1 — in progress.** The photography site is built and running on my own
-computer. It is not on the internet yet.
+**Stage 1 is DONE.** My photography site is live on the internet:
 
-To get it live I need two free accounts: **GitHub** and **Vercel**. That's the
-next thing (see "What's next").
+**https://website-machine-eight.vercel.app**
+
+It's a real public address — opens on a phone, can be sent to people. The words
+and portfolio images are placeholders for now; real ones come in Stage 2.
+
+## Key addresses
+
+- **Live site:** https://website-machine-eight.vercel.app
+- **Code on GitHub:** https://github.com/BodhiScott124/website-machine
+- **Vercel project:** dashboard at vercel.com (imported from the GitHub repo)
+- Local dev preview: `.claude/launch.json` runs `next dev` on port 3000
 
 ## What's working right now
 
 - Git and Node.js are installed on the PC (they were missing at the start).
 - The project is a Next.js website with Tailwind for styling.
-- One page exists for **Bodhi Scott Photography**: a top bar, a hero
-  ("Landscapes and portraits by Bodhi Scott"), a placeholder portfolio grid,
-  a short About, and a Contact section.
-- All the wording and the portfolio images are placeholders for now — real
-  words and photos come in Stage 2.
-- The site builds cleanly (`npm run build` passes) and is fully static, so it
-  will deploy to Vercel without trouble.
-- Work is committed to git locally (2 commits).
+- One page for **Bodhi Scott Photography**: top bar, hero ("Landscapes and
+  portraits by Bodhi Scott"), placeholder portfolio grid, short About, Contact
+  section with the real email (bscotthawaii@gmail.com).
+- `npm run build` passes; the site is fully static.
+- Code is on GitHub (4 commits pushed). Vercel auto-deploys the site whenever
+  a new commit lands on the `main` branch on GitHub.
+
+## Loose end to fix next session
+
+**Git push auth is not saved on the PC.** The GitHub sign-in popup doesn't work
+in the Claude desktop app, so the first push was done with a one-time device
+code (github.com/login/device). That got the code up, but automatic
+push-at-end-of-session is NOT set up yet.
+
+Repeated attempts to persist it failed because the device-code request kept
+asking for the wrong OAuth scopes. **The fix:** request scopes
+`repo read:org gist workflow` (gh CLI's full set), then
+`gh auth login --hostname github.com --with-token` (feed the token via
+`cmd /c "... < file"`, NOT a PowerShell pipe — PS mangles stdin encoding),
+then `gh auth setup-git`. One more device-code authorize from Bodhi and it
+should stick. Client ID for the device flow: `178c6fc778ccc68e1d6a`.
+
+Until that's done: Claude can still commit locally, but Bodhi (or Claude with a
+fresh device code) has to push manually.
 
 ## What's next
 
-1. **Bodhi: create a free GitHub account.** Follow `guide/setup-and-accounts.md`
-   section 2. Then tell Claude the username so it can connect the project and
-   back it up online.
-2. **Bodhi: create a free Vercel account** ("Continue with GitHub") — same guide,
-   section 3.
-3. Claude deploys the site to Vercel and gives Bodhi a public link he can open
-   on his phone. **That finishes Stage 1.**
-4. Then Stage 2: real photos, Bodhi's own words, split into Home / About /
-   Contact pages.
+1. Sort the git-push auth loose end above (one quick device-code authorize).
+2. **Stage 2 — make the site properly his:** real photos, his own words, and
+   split the one page into Home / About / Contact pages. Done when he'd be happy
+   for a paying client to see it.
 
-## Open questions for Bodhi (needed soon)
+## Open questions for Bodhi
 
-- What area does he shoot in / travel to? (Left off the site for now rather
-  than guessing. Email handle is "bscotthawaii" — possibly Hawaii, but not
-  confirmed, so not on the site.)
-
-Resolved: contact email is bscotthawaii@gmail.com — now on the Contact section.
+- What area does he shoot in / travel to? (Left off the site rather than
+  guessing. Email handle "bscotthawaii" hints at Hawaii but not confirmed.)
 
 ## Stages
 
-Rough order. No deadlines — I get to each one when I get to it.
-
-- [~] **1. My photography site** — built locally; not yet live
+- [x] **1. My photography site** — LIVE at website-machine-eight.vercel.app
 - [ ] **2. Make it properly mine** — my real photos, my words, my name
-- [ ] **3. Turn it into a template** — the same design, but able to hold any business's details
+- [ ] **3. Turn it into a template** — same design, holds any business's details
 - [ ] **4. First AI** — get Claude to write website copy for a made-up business
-- [ ] **5. The knowledge file** — one file per business holding everything true about it
-- [ ] **6. Read a real website** — pull a real business's details off their existing site
+- [ ] **5. The knowledge file** — one file per business, everything true about it
+- [ ] **6. Read a real website** — pull a business's details off their old site
 - [ ] **7. Join it all up** — website address in, finished site out
 - [ ] **8. A second template** — and have it pick the right one automatically
-- [ ] **9. Colours and photos** — match the business's real brand colours, find good images
+- [ ] **9. Colours and photos** — match real brand colours, find good images
 - [ ] **10. Put a demo online** — a real prospect's site, on my own domain
 - [ ] **11. Full circle** — point the machine at my own photography site
 
@@ -79,16 +93,17 @@ Rough order. No deadlines — I get to each one when I get to it.
 
 *(Claude: record decisions here as we make them, with the reason.)*
 
-- **Followed the brief's stack: Next.js + TypeScript + Tailwind, aimed at
-  Vercel.** Considered a plain single HTML file (simpler for one page), but the
-  later stages and Lucas's reference build all use Next.js, so starting there
-  avoids a rebuild.
+- **Followed the brief's stack: Next.js + TypeScript + Tailwind on Vercel.**
+  Considered a plain single HTML file (simpler for one page), but later stages
+  and Lucas's reference build use Next.js, so starting there avoids a rebuild.
 - **Installed Node.js even though `setup-and-accounts.md` says it isn't needed.**
-  On this PC the Claude app did not expose a usable Node/npm, and the website
-  tools need it. Installed via `winget` (Git too). *Question for Lucas: is this
-  expected, or should the guide mention it?*
-- **Kept the whole site to one page with sections** (Work / About / Contact as
-  anchors), matching "Stage 1 = one page".
+  The Claude app didn't expose a usable Node/npm on this PC. Installed via
+  `winget` (Git and GitHub CLI too). *Question for Lucas below.*
+- **One page with sections** (Work / About / Contact as anchors), matching
+  "Stage 1 = one page".
+- **Deployed by importing the GitHub repo in the Vercel dashboard** (vercel.com
+  /new → Import → Deploy), rather than the Vercel CLI — the CLI needs a login
+  step that's awkward in this app. Dashboard import also wires up auto-deploy.
 
 ## Things I want to add later
 
@@ -96,14 +111,17 @@ Rough order. No deadlines — I get to each one when I get to it.
 
 ## Questions for Lucas
 
-- The setup guide says Node.js is not needed, but it wasn't available and the
-  build tools require it. Installed it via winget. Is that the right call?
+- The setup guide says Node.js isn't needed, but it wasn't available and the
+  build tools require it — installed via winget. Right call?
+- The GitHub sign-in popup doesn't work in the Claude desktop app, so we had to
+  use device-code auth and it took several tries. Is there a smoother way you
+  used, or should the guide cover this?
 
 ## Session log
 
-- **Session 1 (2026-09-08):** Met Bodhi. Named nothing new — business is "Bodhi
-  Scott Photography", shoots landscapes for fun and portraits for work. Fixed a
-  nested-folder issue, installed Git + Node, scaffolded Next.js, built the
-  one-page Stage 1 site with placeholder content, verified it builds and runs.
-  Added his real contact email to the site. Stopped before GitHub/Vercel signup
-  — that's Bodhi's next move to get it live.
+- **Session 1 (2026-09-08):** Met Bodhi (16, photographer — landscapes for fun,
+  portraits for work; business is "Bodhi Scott Photography"). Fixed a nested
+  folder, installed Git + Node + GitHub CLI, scaffolded Next.js, built the
+  Stage 1 one-page site with placeholder content, pushed to GitHub, and
+  deployed to Vercel. **Site is live** at website-machine-eight.vercel.app.
+  Auth for automatic future pushes still needs finishing (see loose end).
