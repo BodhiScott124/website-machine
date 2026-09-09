@@ -4,7 +4,7 @@
 > session and updates it at the end. Keep it honest and keep it short — if it
 > stops being true it stops being useful.
 
-**Last updated:** 2026-09-08 — end of session 1
+**Last updated:** 2026-09-09 — session 2
 
 ---
 
@@ -52,23 +52,28 @@ and portfolio images are placeholders for now; real ones come in Stage 2.
   the first successful push, so it now persists — `git fetch`/`git push` run
   with no prompt. If it ever stops working, re-do the device-code flow.
 
-## Stage 2 — in progress
+## Stage 2 — nearly done
 
-Done so far:
+Done:
 - Added 7 of Bodhi's real photos (landscape + night sky). Originals sit in
   `public/photos/` (gitignored — one is a 96MB PNG); web-optimised copies are in
   `public/photos/web/` and `public/photos/thumb/`, made by
   `scripts/resize-photos.ps1` (uses .NET System.Drawing, no extra deps).
-- Hero is now a full-screen photo (`hills-dawn.jpg`) with his name over it.
-- Gallery replaces the placeholder colour tiles.
+- Real About text: born Australia, lives Hawaii, started photography 2023,
+  landscapes + night sky, portraits by commission. "· Hawaii" in the hero line.
+- **Split into real pages:** Home (`/`), Work (`/work`), About (`/about`),
+  Contact (`/contact`). Shared `SiteHeader` (client component, highlights the
+  current page) + `SiteFooter` live in the root layout. Gallery data is in
+  `src/app/_data/photos.ts`; the grid markup is `_components/PhotoGrid.tsx`.
+  Home shows the first 4 photos + links through to the rest.
 
-Still to do for Stage 2:
-- **His own words** — the About text is still placeholder; the photo captions
-  are Claude's guesses at what's in each shot. Bodhi should confirm/replace.
-- **Portrait photos** — he mentioned portrait work but only sent landscapes.
-  Site currently says "portrait sessions on request" without showing any.
-- **Split into pages** — still one page with sections. Brief wants Home /
-  About / Contact as separate pages.
+Still open for Stage 2:
+- **Photo captions** — still Claude's guesses ("Sunrise through the cypresses",
+  etc). Asked Bodhi to confirm/correct and say if he wants place names. He said
+  "looks great" but hasn't gone caption-by-caption yet.
+- **Portrait photos** (optional) — site mentions portrait work but shows none.
+  If he wants examples, drop them in `public/photos/` and re-run the resize
+  script.
 
 ## To add or change photos later
 
@@ -78,13 +83,16 @@ Still to do for Stage 2:
 
 ## Open questions for Bodhi
 
-- What area does he shoot in / travel to? (Left off the site rather than
-  guessing. Email handle "bscotthawaii" hints at Hawaii but not confirmed.)
+- Confirm the 7 gallery captions, and whether any should name the location.
+- Does he want any portrait photos on the site?
+
+Resolved: he's Australian, lives in Hawaii. Started photography in 2023.
 
 ## Stages
 
 - [x] **1. My photography site** — LIVE at website-machine-eight.vercel.app
-- [ ] **2. Make it properly mine** — my real photos, my words, my name
+- [~] **2. Make it properly mine** — photos in, words in, pages split. Just
+      caption confirmation + optional portraits left.
 - [ ] **3. Turn it into a template** — same design, holds any business's details
 - [ ] **4. First AI** — get Claude to write website copy for a made-up business
 - [ ] **5. The knowledge file** — one file per business, everything true about it
@@ -132,3 +140,8 @@ Still to do for Stage 2:
   deployed to Vercel. **Site is live** at website-machine-eight.vercel.app.
   GitHub auth via device code took ~6 tries (wrong OAuth scopes each time) but
   is now saved and working.
+- **Session 2 (2026-09-09):** Stage 2. Added his 7 real photos + full-screen
+  hero + gallery. Wrote his real About text from facts he gave (Australia →
+  Hawaii, started 2023). Split the single page into Home / Work / About /
+  Contact with a shared header + footer. All live. Left: he still needs to
+  confirm the photo captions; portraits optional.
