@@ -63,7 +63,8 @@ Done:
   `<country>-<original>`), and a `scripts/photos-manifest.json`.
 - **Gallery = all 33 photos**, listed in `src/app/_data/photos.ts` with
   descriptive captions. `cover: true` marks the photo on each country's card;
-  `featured: true` marks the 6 shown on Home.
+  `featured: true` marks the 6 on Home (kept landscape-only so they fill the
+  3:2 boxes cleanly — check orientation before adding a new one).
 - Real About text: born Australia, lives Hawaii, started photography 2023.
 - **Pages:** Home (`/` — 6 favourites), Work (`/work` — a card per country),
   Work/<country> (`/work/italy` etc — that country's full gallery, a static
