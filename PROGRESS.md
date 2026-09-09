@@ -4,7 +4,7 @@
 > session and updates it at the end. Keep it honest and keep it short — if it
 > stops being true it stops being useful.
 
-**Last updated:** 2026-09-09 — session 2
+**Last updated:** 2026-09-09 — session 2 (part 2)
 
 ---
 
@@ -55,31 +55,35 @@ and portfolio images are placeholders for now; real ones come in Stage 2.
 ## Stage 2 — nearly done
 
 Done:
-- Added 7 of Bodhi's real photos (landscape + night sky). Originals sit in
-  `public/photos/` (gitignored — one is a 96MB PNG); web-optimised copies are in
-  `public/photos/web/` and `public/photos/thumb/`, made by
-  `scripts/resize-photos.ps1` (uses .NET System.Drawing, no extra deps).
-- Real About text: born Australia, lives Hawaii, started photography 2023,
-  landscapes + night sky, portraits by commission. "· Hawaii" in the hero line.
-- **Split into real pages:** Home (`/`), Work (`/work`), About (`/about`),
-  Contact (`/contact`). Shared `SiteHeader` (client component, highlights the
-  current page) + `SiteFooter` live in the root layout. Gallery data is in
-  `src/app/_data/photos.ts`; the grid markup is `_components/PhotoGrid.tsx`.
-  Home shows the first 4 photos + links through to the rest.
+- **Photos are organised by country.** Originals live in
+  `public/photos/<Country>/` (Australia, Italy, Switzerland, United States) —
+  all gitignored (some are huge; there's a 717MB `.tif` in United States that
+  Bodhi can delete). `scripts/resize-photos.ps1` walks those folders, trims any
+  thin white border, writes web + thumb copies (flat, named
+  `<country>-<original>`), and a `scripts/photos-manifest.json`.
+- **Gallery = 20 photos, curated by Claude** from the ~33 Bodhi supplied, spread
+  Italy 6 / Australia 5 / Switzerland 4 / USA 5. The list + captions live in
+  `src/app/_data/photos.ts`. All 33 processed images are committed, so swapping
+  one in is just an edit to that file.
+- Real About text: born Australia, lives Hawaii, started photography 2023.
+- **Real pages:** Home (`/`), Work (`/work` — a section per country), About
+  (`/about`), Contact (`/contact`). Shared `SiteHeader` (client, highlights the
+  current page) + `SiteFooter` in the root layout. `_components/PhotoGrid.tsx`
+  is the shared grid.
 
 Still open for Stage 2:
-- **Photo captions** — still Claude's guesses ("Sunrise through the cypresses",
-  etc). Asked Bodhi to confirm/correct and say if he wants place names. He said
-  "looks great" but hasn't gone caption-by-caption yet.
-- **Portrait photos** (optional) — site mentions portrait work but shows none.
-  If he wants examples, drop them in `public/photos/` and re-run the resize
-  script.
+- **Photo captions** — descriptive, written by Claude, no place names. Bodhi
+  confirmed the first 7 were fine; the newer 13 haven't been checked.
+- **Which 20** — Claude's pick. Bodhi may want to swap some (every processed
+  photo is available; just change `_data/photos.ts`).
+- **Portrait photos** (optional) — none on the site yet.
 
 ## To add or change photos later
 
-1. Drop image files into `public/photos/`
-2. Run `powershell -File scripts/resize-photos.ps1` (Claude does this)
-3. Add/edit the entry in the `photos` list at the top of `src/app/page.tsx`
+1. Drop image files into `public/photos/<Country>/`
+2. Run `powershell -ExecutionPolicy Bypass -File scripts/resize-photos.ps1`
+3. Add/edit the entry in `src/app/_data/photos.ts` (`file` = the generated
+   name; see `scripts/photos-manifest.json`). `featured: true` puts it on Home.
 
 ## Open questions for Bodhi
 
@@ -140,8 +144,9 @@ Resolved: he's Australian, lives in Hawaii. Started photography in 2023.
   deployed to Vercel. **Site is live** at website-machine-eight.vercel.app.
   GitHub auth via device code took ~6 tries (wrong OAuth scopes each time) but
   is now saved and working.
-- **Session 2 (2026-09-09):** Stage 2. Added his 7 real photos + full-screen
-  hero + gallery. Wrote his real About text from facts he gave (Australia →
-  Hawaii, started 2023). Split the single page into Home / Work / About /
-  Contact with a shared header + footer. All live. Left: he still needs to
-  confirm the photo captions; portraits optional.
+- **Session 2 (2026-09-09):** Stage 2. Real photos + hero + gallery; real About
+  text (Australia → Hawaii, 2023); split into Home / Work / About / Contact.
+  Then Bodhi added ~33 photos sorted into country subfolders — Claude curated to
+  20, rebuilt the Work page as a section per country, added white-border
+  trimming to the resize script. All live. Left: caption check on the newer
+  photos; portraits optional.
