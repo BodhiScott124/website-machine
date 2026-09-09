@@ -60,7 +60,7 @@ export default function Home() {
           <p className="mt-6 max-w-2xl text-black/75">
             I grew up in Australia and now live in Hawaii. I picked up
             photography in 2023 and it stuck fast — mostly landscapes and the
-            night sky, with portrait work by commission.
+            night sky.
           </p>
           <Link
             href="/about"
@@ -76,7 +76,7 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-6 py-20">
           <h2 className="text-2xl font-semibold tracking-tight">Get in touch</h2>
           <p className="mt-4 max-w-xl text-black/75">
-            For prints, bookings and enquiries:
+            Questions, or want to work together?
           </p>
           <a
             href="mailto:bscotthawaii@gmail.com"

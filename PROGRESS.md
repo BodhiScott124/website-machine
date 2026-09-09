@@ -20,12 +20,20 @@ Full spec: `guide/build-brief.md`
 
 ## Where I'm up to
 
-**Stage 1 is DONE.** My photography site is live on the internet:
+**Stages 1 and 2 are DONE.** The photography site is live, real, and properly
+mine: **https://website-machine-eight.vercel.app**
 
-**https://website-machine-eight.vercel.app**
+Real photos (33, by country, with a lightbox), my own words, Home / Work /
+About / Contact pages, a proper share preview.
 
-It's a real public address — opens on a phone, can be sent to people. The words
-and portfolio images are placeholders for now; real ones come in Stage 2.
+**Buying `bodhiscottphotography.com`** (through Vercel, ~$10–12/yr, needs Dad's
+card) — planned, not done yet. When it's bought: connect it in Vercel, then
+change `metadataBase` in `src/app/layout.tsx` from the vercel.app URL to the
+real one.
+
+**Next: Stage 3** — pull my details (name, contact, the photo list) out of the
+page code into a `knowledge.json` file, so the design and the details become
+separate things. Nothing changes visually.
 
 ## Key addresses
 
@@ -77,10 +85,17 @@ Done:
   `src/app/_data/photo-sizes.json`, which `scripts/resize-photos.ps1` writes
   (plain UTF-8, no BOM — the JSON loader rejects a BOM).
 
-Still open for Stage 2:
-- **Photo captions** — descriptive, written by Claude, no place names. Bodhi
-  confirmed the first 7; the rest haven't been checked.
-- **Portrait photos** (optional) — none on the site yet.
+- **Share preview (Open Graph):** `public/og.jpg` (1200×630, the cypress
+  sunburst) + `openGraph`/`twitter` metadata in `layout.tsx`. `metadataBase` is
+  hardcoded to the vercel.app URL — **change it to the real domain once
+  bodhiscottphotography.com is connected** (there's a TODO in layout.tsx).
+- **Prints:** all "prints available" mentions removed (Bodhi isn't selling
+  prints yet).
+- **Portraits:** Bodhi doesn't have permission to show portrait photos yet, so
+  the claim is now one small line on the About page only — removed from the
+  home page and the metadata.
+
+Stage 2 is essentially done. Captions are all approved.
 
 ## To add or change photos later
 
@@ -99,8 +114,9 @@ Resolved: he's Australian, lives in Hawaii. Started photography in 2023.
 ## Stages
 
 - [x] **1. My photography site** — LIVE at website-machine-eight.vercel.app
-- [~] **2. Make it properly mine** — photos in, words in, pages split. Just
-      caption confirmation + optional portraits left.
+- [x] **2. Make it properly mine** — real photos, real words, real pages,
+      captions approved, share preview set. (Portraits held back — no permission
+      to show them yet.)
 - [ ] **3. Turn it into a template** — same design, holds any business's details
 - [ ] **4. First AI** — get Claude to write website copy for a made-up business
 - [ ] **5. The knowledge file** — one file per business, everything true about it

@@ -25,9 +25,8 @@ export default function AboutPage() {
               shoot is landscapes and the night sky: chasing clear skies, early
               light, and the quiet you only get before sunrise.
             </p>
-            <p>
-              I also take on portrait work by commission. If you&apos;re after a
-              session, get in touch and tell me what you have in mind.
+            <p className="text-black/55">
+              Also available for the occasional portrait commission.
             </p>
             <p>
               <Link
