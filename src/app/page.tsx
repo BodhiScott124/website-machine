@@ -56,7 +56,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
           <div className="relative mx-auto w-full max-w-5xl px-6 pb-16 text-white">
             <p className="text-sm uppercase tracking-[0.2em] text-white/70">
-              Landscape &amp; night-sky photography
+              Landscape &amp; night-sky photography · Hawaii
             </p>
             <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
               Bodhi Scott
@@ -99,17 +99,17 @@ export default function Home() {
             <h2 className="text-2xl font-semibold tracking-tight">About</h2>
             <div className="mt-6 max-w-2xl space-y-4 text-black/75">
               <p>
-                I&apos;m Bodhi Scott. Most of my own work is landscapes and the
-                night sky — early starts, dark skies, and waiting for the light
-                to do something worth keeping.
+                I&apos;m Bodhi Scott. I grew up in Australia and now live in
+                Hawaii — which turned out to be a good place to point a camera.
               </p>
               <p>
-                I also shoot portraits on commission. If you&apos;re after a
-                session, get in touch and tell me what you have in mind.
+                I picked up photography in 2023 and it stuck fast. Most of what I
+                shoot is landscapes and the night sky: chasing clear skies, early
+                light, and the quiet you only get before sunrise.
               </p>
-              <p className="text-black/45">
-                (Placeholder wording — replace with your own when you&apos;re
-                ready.)
+              <p>
+                I also take on portrait work by commission. If you&apos;re after
+                a session, get in touch and tell me what you have in mind.
               </p>
             </div>
           </div>

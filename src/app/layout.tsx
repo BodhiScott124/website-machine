@@ -9,7 +9,7 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Bodhi Scott Photography",
   description:
-    "Bodhi Scott is a photographer shooting landscapes and portraits. Get in touch about a shoot.",
+    "Bodhi Scott is a landscape and night-sky photographer based in Hawaii. Portrait sessions on request.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
