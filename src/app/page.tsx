@@ -122,14 +122,11 @@ export default function Home() {
               about what you have in mind.
             </p>
             <a
-              href="mailto:hello@example.com"
+              href="mailto:bscotthawaii@gmail.com"
               className="mt-6 inline-block text-lg font-medium underline underline-offset-4 hover:opacity-70"
             >
-              hello@example.com
+              bscotthawaii@gmail.com
             </a>
-            <p className="mt-2 text-sm text-black/45">
-              (Placeholder address — give Claude your real email to put here.)
-            </p>
           </div>
         </section>
       </main>

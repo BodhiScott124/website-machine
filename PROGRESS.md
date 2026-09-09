@@ -53,10 +53,11 @@ next thing (see "What's next").
 
 ## Open questions for Bodhi (needed soon)
 
-- What email address should go on the Contact section? (Right now it's a
-  placeholder — his real email is not on the site.)
 - What area does he shoot in / travel to? (Left off the site for now rather
-  than guessing.)
+  than guessing. Email handle is "bscotthawaii" — possibly Hawaii, but not
+  confirmed, so not on the site.)
+
+Resolved: contact email is bscotthawaii@gmail.com — now on the Contact section.
 
 ## Stages
 
@@ -104,4 +105,5 @@ Rough order. No deadlines — I get to each one when I get to it.
   Scott Photography", shoots landscapes for fun and portraits for work. Fixed a
   nested-folder issue, installed Git + Node, scaffolded Next.js, built the
   one-page Stage 1 site with placeholder content, verified it builds and runs.
-  Stopped before GitHub/Vercel signup — that's Bodhi's next move to get it live.
+  Added his real contact email to the site. Stopped before GitHub/Vercel signup
+  — that's Bodhi's next move to get it live.
