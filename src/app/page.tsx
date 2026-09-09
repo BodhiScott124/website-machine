@@ -4,9 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PhotoGrid from "./_components/PhotoGrid";
-import { photos } from "./_data/photos";
-
-const featured = photos.slice(0, 4);
+import { featuredPhotos } from "./_data/photos";
 
 export default function Home() {
   return (
@@ -14,7 +12,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative flex h-[80vh] min-h-[460px] items-end">
         <Image
-          src="/photos/web/hills-dawn.jpg"
+          src="/photos/web/italy-6ii7186.jpg"
           alt="Mist lying in the valleys at first light"
           fill
           priority
@@ -50,7 +48,7 @@ export default function Home() {
             </Link>
           </div>
           <div className="mt-10">
-            <PhotoGrid items={featured} />
+            <PhotoGrid items={featuredPhotos} />
           </div>
         </div>
       </section>

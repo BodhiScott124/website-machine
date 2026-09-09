@@ -41,7 +41,7 @@ export default function AboutPage() {
 
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-stone-100">
             <Image
-              src="/photos/thumb/hills-dawn.jpg"
+              src="/photos/thumb/italy-6ii7186.jpg"
               alt="Mist lying in the valleys at first light"
               fill
               sizes="(max-width: 640px) 100vw, 40vw"
