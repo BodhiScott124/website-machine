@@ -105,7 +105,8 @@ Anthropic API key first** — stop and walk Bodhi through
 - Favicon (browser-tab icon is still the default).
 - Instagram link in the footer, if Bodhi has one.
 - Photos fade in as they load.
-- Site name wraps to two lines on phones — tighten.
+- Hero eyebrow ("LANDSCAPE & NIGHT-SKY PHOTOGRAPHY · HAWAII") still wraps to
+  two lines on the narrowest phones — minor.
 
 ## Questions for Lucas
 
@@ -129,3 +130,5 @@ Anthropic API key first** — stop and walk Bodhi through
   words, photo list) out of the page code into `src/app/_data/knowledge.json`;
   pages now read from it via `knowledge.ts`. Verified: editing the file changes
   the site, and nothing changed visually. Deleted the old `_data/photos.ts`.
+  Then fixed the mobile header (site name was wrapping onto two lines and
+  colliding with the nav — now stacks name over nav below the `sm` breakpoint).

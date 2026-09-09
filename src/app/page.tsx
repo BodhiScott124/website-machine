@@ -24,13 +24,13 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/25" />
         <div className="relative mx-auto w-full max-w-5xl px-6 pb-14 text-white">
-          <p className="text-sm uppercase tracking-[0.2em] text-white/70">
+          <p className="text-xs uppercase tracking-[0.15em] text-white/70 sm:text-sm sm:tracking-[0.2em]">
             {knowledge.specialty} · {knowledge.location}
           </p>
           <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
             {knowledge.name}
           </h1>
-          <p className="mt-4 max-w-xl text-lg text-white/85">
+          <p className="mt-4 max-w-xl text-base text-white/85 sm:text-lg">
             {knowledge.tagline}
           </p>
         </div>

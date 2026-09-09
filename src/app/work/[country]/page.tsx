@@ -48,7 +48,7 @@ export default async function CountryPage({
           {country.name}
         </h1>
         <p className="mt-3 text-black/60">
-          {items.length} photo{items.length === 1 ? "" : "s"} from {country.name}.
+          {items.length} photo{items.length === 1 ? "" : "s"}.
         </p>
         <div className="mt-12">
           <PhotoGrid items={items} />
