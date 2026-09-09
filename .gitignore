@@ -36,6 +36,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# original full-size photos — kept on disk / OneDrive, not in git.
+# only the web-optimised versions (photos/web, photos/thumb) are committed.
+/public/photos/*.jpg
+/public/photos/*.jpeg
+/public/photos/*.png
+/public/photos/*.JPG
+/public/photos/*.PNG
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
