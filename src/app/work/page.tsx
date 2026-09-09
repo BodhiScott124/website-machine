@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import PhotoGrid from "../_components/PhotoGrid";
-import { countryOrder, photosByCountry } from "../_data/photos";
+import Image from "next/image";
+import Link from "next/link";
+import { countries, coverPhoto, photosByCountry } from "../_data/photos";
 
 export const metadata: Metadata = {
   title: "Work — Bodhi Scott Photography",
   description:
-    "Landscape and night-sky photographs by Bodhi Scott, grouped by country.",
+    "Landscape and night-sky photography by Bodhi Scott, by country: Italy, Australia, Switzerland and the United States.",
 };
 
 export default function WorkPage() {
@@ -15,20 +16,40 @@ export default function WorkPage() {
         <h1 className="text-3xl font-semibold tracking-tight">Selected work</h1>
         <p className="mt-3 max-w-xl text-black/60">
           Landscapes and the night sky, from wherever I&apos;ve been pointing a
-          camera. Prints of any of these are available — get in touch.
+          camera. Pick a place.
         </p>
 
-        <div className="mt-14 space-y-16">
-          {countryOrder.map((country) => (
-            <section key={country} className="scroll-mt-20" id={country.toLowerCase().replace(/\s+/g, "-")}>
-              <h2 className="text-xl font-semibold tracking-tight text-black/80">
-                {country}
-              </h2>
-              <div className="mt-6">
-                <PhotoGrid items={photosByCountry(country)} />
-              </div>
-            </section>
-          ))}
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {countries.map((country) => {
+            const cover = coverPhoto(country.name);
+            const count = photosByCountry(country.name).length;
+            return (
+              <Link
+                key={country.slug}
+                href={`/work/${country.slug}`}
+                className="group block"
+              >
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg bg-stone-100">
+                  <Image
+                    src={`/photos/thumb/${cover.file}.jpg`}
+                    alt={`${country.name} — ${cover.caption}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-4 text-white">
+                    <p className="text-lg font-semibold tracking-tight">
+                      {country.name}
+                    </p>
+                    <p className="text-sm text-white/75">
+                      {count} photo{count === 1 ? "" : "s"}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </main>

@@ -61,21 +61,19 @@ Done:
   Bodhi can delete). `scripts/resize-photos.ps1` walks those folders, trims any
   thin white border, writes web + thumb copies (flat, named
   `<country>-<original>`), and a `scripts/photos-manifest.json`.
-- **Gallery = 20 photos, curated by Claude** from the ~33 Bodhi supplied, spread
-  Italy 6 / Australia 5 / Switzerland 4 / USA 5. The list + captions live in
-  `src/app/_data/photos.ts`. All 33 processed images are committed, so swapping
-  one in is just an edit to that file.
+- **Gallery = all 33 photos**, listed in `src/app/_data/photos.ts` with
+  descriptive captions. `cover: true` marks the photo on each country's card;
+  `featured: true` marks the 6 shown on Home.
 - Real About text: born Australia, lives Hawaii, started photography 2023.
-- **Real pages:** Home (`/`), Work (`/work` — a section per country), About
-  (`/about`), Contact (`/contact`). Shared `SiteHeader` (client, highlights the
-  current page) + `SiteFooter` in the root layout. `_components/PhotoGrid.tsx`
-  is the shared grid.
+- **Pages:** Home (`/` — 6 favourites), Work (`/work` — a card per country),
+  Work/<country> (`/work/italy` etc — that country's full gallery, a static
+  page per `generateStaticParams`), About, Contact. Shared `SiteHeader`
+  (client, highlights current page) + `SiteFooter` in the root layout.
+  `_components/PhotoGrid.tsx` is the shared grid.
 
 Still open for Stage 2:
 - **Photo captions** — descriptive, written by Claude, no place names. Bodhi
-  confirmed the first 7 were fine; the newer 13 haven't been checked.
-- **Which 20** — Claude's pick. Bodhi may want to swap some (every processed
-  photo is available; just change `_data/photos.ts`).
+  confirmed the first 7; the rest haven't been checked.
 - **Portrait photos** (optional) — none on the site yet.
 
 ## To add or change photos later
