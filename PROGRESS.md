@@ -42,33 +42,21 @@ and portfolio images are placeholders for now; real ones come in Stage 2.
   portraits by Bodhi Scott"), placeholder portfolio grid, short About, Contact
   section with the real email (bscotthawaii@gmail.com).
 - `npm run build` passes; the site is fully static.
-- Code is on GitHub (4 commits pushed). Vercel auto-deploys the site whenever
-  a new commit lands on the `main` branch on GitHub.
-
-## Loose end to fix next session
-
-**Git push auth is not saved on the PC.** The GitHub sign-in popup doesn't work
-in the Claude desktop app, so the first push was done with a one-time device
-code (github.com/login/device). That got the code up, but automatic
-push-at-end-of-session is NOT set up yet.
-
-Repeated attempts to persist it failed because the device-code request kept
-asking for the wrong OAuth scopes. **The fix:** request scopes
-`repo read:org gist workflow` (gh CLI's full set), then
-`gh auth login --hostname github.com --with-token` (feed the token via
-`cmd /c "... < file"`, NOT a PowerShell pipe — PS mangles stdin encoding),
-then `gh auth setup-git`. One more device-code authorize from Bodhi and it
-should stick. Client ID for the device flow: `178c6fc778ccc68e1d6a`.
-
-Until that's done: Claude can still commit locally, but Bodhi (or Claude with a
-fresh device code) has to push manually.
+- Code is on GitHub (commits pushed). Vercel auto-deploys the site whenever a
+  new commit lands on the `main` branch on GitHub.
+- **Git push auth works and is saved.** Getting there was painful: the GitHub
+  sign-in popup doesn't work in the Claude desktop app, so auth was done with a
+  one-time device code (github.com/login/device), client ID
+  `178c6fc778ccc68e1d6a`, scopes `repo`. Git Credential Manager (`credential.
+  helper = manager`) captured the token into Windows Credential Manager during
+  the first successful push, so it now persists — `git fetch`/`git push` run
+  with no prompt. If it ever stops working, re-do the device-code flow.
 
 ## What's next
 
-1. Sort the git-push auth loose end above (one quick device-code authorize).
-2. **Stage 2 — make the site properly his:** real photos, his own words, and
-   split the one page into Home / About / Contact pages. Done when he'd be happy
-   for a paying client to see it.
+**Stage 2 — make the site properly his:** real photos, his own words, and split
+the one page into Home / About / Contact pages. Done when he'd be happy for a
+paying photography client to see it.
 
 ## Open questions for Bodhi
 
@@ -124,4 +112,5 @@ fresh device code) has to push manually.
   folder, installed Git + Node + GitHub CLI, scaffolded Next.js, built the
   Stage 1 one-page site with placeholder content, pushed to GitHub, and
   deployed to Vercel. **Site is live** at website-machine-eight.vercel.app.
-  Auth for automatic future pushes still needs finishing (see loose end).
+  GitHub auth via device code took ~6 tries (wrong OAuth scopes each time) but
+  is now saved and working.
