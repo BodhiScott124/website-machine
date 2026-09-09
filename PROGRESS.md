@@ -52,11 +52,29 @@ and portfolio images are placeholders for now; real ones come in Stage 2.
   the first successful push, so it now persists — `git fetch`/`git push` run
   with no prompt. If it ever stops working, re-do the device-code flow.
 
-## What's next
+## Stage 2 — in progress
 
-**Stage 2 — make the site properly his:** real photos, his own words, and split
-the one page into Home / About / Contact pages. Done when he'd be happy for a
-paying photography client to see it.
+Done so far:
+- Added 7 of Bodhi's real photos (landscape + night sky). Originals sit in
+  `public/photos/` (gitignored — one is a 96MB PNG); web-optimised copies are in
+  `public/photos/web/` and `public/photos/thumb/`, made by
+  `scripts/resize-photos.ps1` (uses .NET System.Drawing, no extra deps).
+- Hero is now a full-screen photo (`hills-dawn.jpg`) with his name over it.
+- Gallery replaces the placeholder colour tiles.
+
+Still to do for Stage 2:
+- **His own words** — the About text is still placeholder; the photo captions
+  are Claude's guesses at what's in each shot. Bodhi should confirm/replace.
+- **Portrait photos** — he mentioned portrait work but only sent landscapes.
+  Site currently says "portrait sessions on request" without showing any.
+- **Split into pages** — still one page with sections. Brief wants Home /
+  About / Contact as separate pages.
+
+## To add or change photos later
+
+1. Drop image files into `public/photos/`
+2. Run `powershell -File scripts/resize-photos.ps1` (Claude does this)
+3. Add/edit the entry in the `photos` list at the top of `src/app/page.tsx`
 
 ## Open questions for Bodhi
 
