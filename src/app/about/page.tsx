@@ -34,12 +34,12 @@ export default function AboutPage() {
 
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-stone-100">
             <Image
-              src={`/photos/thumb/${knowledge.heroPhoto}.jpg`}
+              src={`/photos/thumb/${knowledge.aboutPhoto}.jpg`}
               alt=""
               fill
               sizes="(max-width: 640px) 100vw, 40vw"
-              placeholder={photoBlur(knowledge.heroPhoto) ? "blur" : "empty"}
-              blurDataURL={photoBlur(knowledge.heroPhoto)}
+              placeholder={photoBlur(knowledge.aboutPhoto) ? "blur" : "empty"}
+              blurDataURL={photoBlur(knowledge.aboutPhoto)}
               className="object-cover"
             />
           </div>

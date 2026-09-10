@@ -34,6 +34,7 @@ export type Knowledge = {
   siteUrl: string;
   heroPhoto: string;
   ogPhoto: string;
+  aboutPhoto: string;
   countries: Country[];
   photos: Photo[];
 };

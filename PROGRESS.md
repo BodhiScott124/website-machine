@@ -78,6 +78,13 @@ Anthropic API key first** — stop and walk Bodhi through
    `featured` puts it on Home — keep those landscape so they fill the boxes.
    `cover` sets a country card's photo.
 
+`knowledge.json` also has `heroPhoto` (home banner), `ogPhoto` (share image —
+rerun `scripts/make-og-images.ps1` after changing), and `aboutPhoto` (the image
+on the About page). To use a photo of Bodhi there: make a folder like
+`public/photos/Portrait/`, drop the file in, run the resize script, then set
+`aboutPhoto` to the generated name. A vertical/square photo fits best (the box
+is 4:5).
+
 ## Environment notes
 
 - **Git + Node + GitHub CLI** were installed via `winget` (the Claude app

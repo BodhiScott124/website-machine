@@ -10,6 +10,11 @@
 # Run after adding or moving photos:
 #   powershell -ExecutionPolicy Bypass -File scripts/resize-photos.ps1
 #
+# Any subfolder is processed, not just countries. For a photo that isn't gallery
+# work (e.g. a photo of Bodhi for the About page) make a folder like
+# public/photos/Portrait/, drop the file in, run this, then point `aboutPhoto`
+# in knowledge.json at the generated name (see photos-manifest.json).
+#
 # Uses .NET System.Drawing, built into Windows — no extra installs.
 
 Add-Type -AssemblyName System.Drawing
