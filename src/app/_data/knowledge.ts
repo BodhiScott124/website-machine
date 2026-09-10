@@ -68,3 +68,8 @@ export function photoBlur(file: string): string | undefined {
   return sizes[file]?.[2];
 }
 
+export function photoDims(file: string): [number, number] {
+  const s = sizes[file];
+  return s ? [s[0], s[1]] : [3, 2];
+}
+

@@ -153,4 +153,6 @@ is 4:5).
   Then a batch of free polish: favicon (camera), blur-up image loading,
   robots.txt + sitemap, per-country share images, custom 404 page, Instagram
   link (@bodhi_scott_photography) in the footer and on Contact, and Vercel
-  Analytics (needs enabling in the Vercel dashboard).
+  Analytics (needs enabling in the Vercel dashboard). Added `printsNote` ("email
+  me") to Work/country/Contact. Added a real photo of Bodhi (B&W, `Portrait/`
+  folder) — it's now the About page image, shown at its natural shape.
