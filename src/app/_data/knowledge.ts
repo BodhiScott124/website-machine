@@ -30,6 +30,7 @@ export type Knowledge = {
   instagram: string;
   about: string[];
   portraitNote: string;
+  printsNote: string;
   siteUrl: string;
   heroPhoto: string;
   ogPhoto: string;

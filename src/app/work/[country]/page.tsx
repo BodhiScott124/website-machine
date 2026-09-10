@@ -60,6 +60,9 @@ export default async function CountryPage({
         <p className="mt-3 text-black/60">
           {items.length} photo{items.length === 1 ? "" : "s"}.
         </p>
+        <p className="mt-2 max-w-xl text-sm text-black/45">
+          {knowledge.printsNote}
+        </p>
         <div className="mt-12">
           <PhotoGrid items={items} />
         </div>

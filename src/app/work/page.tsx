@@ -25,6 +25,9 @@ export default function WorkPage() {
           Landscapes and the night sky, from wherever I&apos;ve been pointing a
           camera. Pick a place.
         </p>
+        <p className="mt-2 max-w-xl text-sm text-black/45">
+          {knowledge.printsNote}
+        </p>
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {countries.map((country) => {

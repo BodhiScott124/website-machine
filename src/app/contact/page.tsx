@@ -15,6 +15,7 @@ export default function ContactPage() {
           Send me an email and tell me a bit about what you have in mind. I read
           everything and reply as soon as I can.
         </p>
+        <p className="mt-3 max-w-xl text-black/60">{knowledge.printsNote}</p>
         <a
           href={`mailto:${knowledge.email}`}
           className="mt-8 inline-block text-xl font-medium underline underline-offset-4 hover:opacity-70"
